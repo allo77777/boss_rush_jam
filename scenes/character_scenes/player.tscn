@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://brkvwpeiqu2d1"]
+[gd_scene load_steps=9 format=3 uid="uid://brkvwpeiqu2d1"]
 
 [ext_resource type="Texture2D" uid="uid://bexi05jilhju1" path="res://icon.svg" id="1_303bu"]
 [ext_resource type="Script" path="res://scripts/character_scripts/player.gd" id="1_j1dy0"]
 [ext_resource type="Script" path="res://scripts/character_scripts/player_state_machine/state_machine.gd" id="3_8ych0"]
+[ext_resource type="Script" path="res://scripts/character_scripts/player_state_machine/idle_state.gd" id="4_6ak6w"]
+[ext_resource type="Script" path="res://scripts/character_scripts/player_state_machine/run_state.gd" id="5_0euhr"]
+[ext_resource type="Script" path="res://scripts/character_scripts/player_state_machine/jump_state.gd" id="6_k6ff8"]
+[ext_resource type="Script" path="res://scripts/character_scripts/player_state_machine/attack_state.gd" id="7_axjss"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pjcb2"]
 radius = 52.2015
@@ -23,15 +27,13 @@ debug_color = Color(0.827451, 0, 0.192157, 0.658824)
 script = ExtResource("3_8ych0")
 
 [node name="idle_state" type="Node2D" parent="state_machine"]
+script = ExtResource("4_6ak6w")
 
 [node name="run_state" type="Node2D" parent="state_machine"]
+script = ExtResource("5_0euhr")
 
 [node name="jump_state" type="Node2D" parent="state_machine"]
+script = ExtResource("6_k6ff8")
 
 [node name="attack_state" type="Node2D" parent="state_machine"]
-
-[node name="dodge_state" type="Node2D" parent="state_machine"]
-
-[node name="hurt_state" type="Node2D" parent="state_machine"]
-
-[node name="dead_state" type="Node2D" parent="state_machine"]
+script = ExtResource("7_axjss")
