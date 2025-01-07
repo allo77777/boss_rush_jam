@@ -8,6 +8,9 @@ func Enter():
 		
 	animation_tree.animation_mode.travel("CrouchIdle") #Animation
 	
+	player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump
+	player.DASH_USED = player.DASH_AMOUNT #Reset dash
+	
 	look_to_mouse = true #Player is able to look towards mouse position
 
 func Exit():
@@ -32,9 +35,9 @@ func Physics_Update(_delta: float):
 	elif direction != 0:
 		StateTransition.emit(self, "Crouch_Run")
 	
-	#Crouch Idle -> Roll	
-	elif Input.is_action_just_pressed("roll") and player.is_on_floor():
-		StateTransition.emit(self, "Roll")
+	#Crouch Idle -> Dash	
+	elif Input.is_action_just_pressed("dash") and player.DASH:
+		StateTransition.emit(self, "Dash")
 		
 	elif Input.is_action_just_pressed("jump") and player.is_on_floor():
 		StateTransition.emit(self, "Jump")

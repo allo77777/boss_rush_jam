@@ -59,14 +59,3 @@ func Direction(flipSprite: bool):
 		if flipSprite == true:
 			player.facing = -1
 			player_sprite.flip_h = true
-			
-func _input(event):
-	if event is InputEventMouseMotion and look_to_mouse == true:
-			
-		if player.cursor_pos.x >= 0:
-			player_sprite.flip_h = false
-			player.facing = 1		
-	
-		else:
-			player_sprite.flip_h = true
-			player.facing = -1

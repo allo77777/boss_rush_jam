@@ -8,7 +8,8 @@ func Enter():
 		
 	animation_tree.animation_mode.travel("WallSlideLanding") #Animation
 	
-	player.double_jump_used = player.double_jump_amount #Reset double jump
+	player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump
+	player.DASH_USED = player.DASH_AMOUNT #Reset dash
 	
 func Exit():
 	coyote_time.start()
@@ -35,8 +36,12 @@ func Physics_Update(_delta: float):
 	else:
 		StateTransition.emit(self, "Air")
 		
+	#WallSlide -> Dash
+	if Input.is_action_just_pressed("dash") and player.DASH:				
+		StateTransition.emit(self, "Dash")
+		
 	#WallSlide -> Idle
-	if player.is_on_floor():
+	elif player.is_on_floor():
 		StateTransition.emit(self, "Idle")
 		
 	#WallSlide -> Jump
@@ -50,7 +55,7 @@ func Physics_Update(_delta: float):
 	elif jump_cooldown.time_left > 0:
 		StateTransition.emit(self, "Jump")
 		
-		player.double_jump_used = player.double_jump_amount #Reset double jump
+		player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump
 		jump_cooldown.stop()
 		
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:

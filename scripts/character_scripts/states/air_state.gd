@@ -53,20 +53,27 @@ func Physics_Update(delta: float):
 	if player.is_on_floor() and jump_cooldown.time_left > 0:
 		StateTransition.emit(self, "Jump")
 		
-		player.double_jump_used = player.double_jump_amount #Reset double jump
+		player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump
 		jump_cooldown.stop()
 		
 	#Coyote Time
 	elif !player.is_on_floor() and coyote_time.time_left > 0 and Input.is_action_just_pressed("jump"):
 		StateTransition.emit(self, "Jump")
 		
-		player.double_jump_used = player.double_jump_amount #Reset double jump	
+		player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump	
+		
+	#Air -> Dash
+	elif Input.is_action_just_pressed("dash") and player.DASH and player.DASH_USED >= 1 :	
+		StateTransition.emit(self, "Dash")
+		
+		player.DASH_USED -= 1
 		
 	#Double jump
-	elif player.double_jump == true and player.double_jump_used >= 1 and Input.is_action_just_pressed("jump"):
+	elif player.DOUBLE_JUMP == true and player.DOUBLE_JUMP_USED >= 1 and Input.is_action_just_pressed("jump"):
 		StateTransition.emit(self, "Jump")
 		
-		player.double_jump_used -= 1
+		player.DOUBLE_JUMP_USED -= 1
+		player.DASH_USED = player.DASH_AMOUNT #Reset dash
 		animation_tree.animation_mode.travel("DoubleJump")
 		
 	#Air -> Idle

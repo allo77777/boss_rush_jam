@@ -5,13 +5,18 @@ class_name Player
 @export_category("Character Movement")
 @export var SPEED: int = 225
 @export var JUMP_HEIGHT: int = -350
-@export var ROLL_SPEED_MULTIPLIER: float = 1.5
+@export var DASH_SPEED_MULTIPLIER: float = 2
 @export var WALLSLIDE_SPEED: float = 100
 @export var CROUCH_SPEED_MULTIPLIER: float = 0.5
-@export var PUSHPULL_SPEED_MULTIPLIER: float = 0.5
-@export var CLIMB_SPEED: float = 150
-@export var double_jump: bool
-@export var double_jump_amount: int = 1
+
+@export_category("Abilities")
+@export var DOUBLE_JUMP: bool  = true
+@export var DOUBLE_JUMP_AMOUNT: int = 1
+@export var DOUBLE_JUMP_USED: int
+@export var DASH: bool = true
+@export var DASH_AMOUNT: int = 1
+@export var DASH_USED: int 
+
 
 #References
 @onready var root: Node2D = $".."
@@ -25,19 +30,19 @@ class_name Player
 var debug_mode: bool = false
 var facing: int = 1
 var can_jump: bool = true
-var is_rolling: bool = false
+var is_dashing: bool = false
 var prevVelocity: Vector2 = Vector2.ZERO
 var cursor_pos: Vector2
 var global_cursor_pos: Vector2
 var all_interactions = []
 var interactable_pos: Vector2
 
-var double_jump_used = double_jump_amount
-
 #Plays once
 func _ready():	
 	#Debug
 	debug_mode = root.debug_mode
+	DOUBLE_JUMP_USED = DOUBLE_JUMP_AMOUNT
+	DASH_USED = DASH_AMOUNT
 		
 	#Set animation tree to active
 	animation_tree.set_active(true)

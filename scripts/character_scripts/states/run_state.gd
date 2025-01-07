@@ -8,7 +8,8 @@ func Enter():
 		
 	animation_tree.animation_mode.travel("Run") #Animation
 	
-	player.double_jump_used = player.double_jump_amount #Reset double jump
+	player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump
+	player.DASH_USED = player.DASH_AMOUNT #Reset dash
 
 func Physics_Update(_delta: float):
 	#X-Axis movement
@@ -22,9 +23,9 @@ func Physics_Update(_delta: float):
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		StateTransition.emit(self, "Jump")
 		
-	#Run -> Roll
-	elif Input.is_action_just_pressed("roll") and player.is_on_floor():
-		StateTransition.emit(self, "Roll")
+	#Run -> Dash
+	elif Input.is_action_just_pressed("dash") and player.DASH:
+		StateTransition.emit(self, "Dash")
 		
 	#Run -> Air
 	elif !player.is_on_floor():
