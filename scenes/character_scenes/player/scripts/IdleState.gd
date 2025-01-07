@@ -3,8 +3,8 @@ class_name IdleState
 
 #Plays once
 func Enter():
-	#if player.debug_mode == true:
-		#print("Idle")
+	if player.debug_mode == true:
+		print("Idle")
 		
 	animation_tree.animation_mode.travel("Idle") #Animation
 	
@@ -33,14 +33,7 @@ func Physics_Update(_delta: float):
 	#Idle -> Air
 	elif !player.is_on_floor():
 		StateTransition.emit(self, "Air")
-		
-	#Idle -> PushPull Idle
-	elif player.is_pushpull:
-		StateTransition.emit(self, "PushPullIdle")
-		
-	#Idle -> Climb
-	elif player.is_climbing:
-		StateTransition.emit(self, "Climb")
+	
 		
 	#Idle -> Crouch Idle
 	elif Input.is_action_pressed("crouch"):
