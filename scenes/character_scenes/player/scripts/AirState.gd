@@ -62,10 +62,6 @@ func Physics_Update(delta: float):
 		
 		player_stats.double_jump_used = player_stats.double_jump_amount #Reset double jump	
 		
-	#Air -> Climb
-	elif player.is_climbing:
-		StateTransition.emit(self, "Climb")
-		
 	#Double jump
 	elif player_stats.double_jump == true and player_stats.double_jump_used >= 1 and Input.is_action_just_pressed("jump"):
 		StateTransition.emit(self, "Jump")
@@ -78,11 +74,7 @@ func Physics_Update(delta: float):
 		StateTransition.emit(self, "Idle")
 	
 	
-	elif !player.is_on_floor() and player.velocity.y > 0:
-		#Air -> WallHang
-		if raycast_up_right.is_colliding() and !raycast_uppper_right.is_colliding() and player.facing == 1 or raycast_up_left.is_colliding() and !raycast_uppper_left.is_colliding() and player.facing == -1:
-			StateTransition.emit(self, "WallHang")
-			
+	elif !player.is_on_floor() and player.velocity.y > 0:			
 		#Air -> WallSlide
-		elif raycast_up_right.is_colliding() and raycast_down_right.is_colliding() or raycast_up_left.is_colliding() and raycast_down_left.is_colliding():
+		if raycast_up_right.is_colliding() and raycast_down_right.is_colliding() or raycast_up_left.is_colliding() and raycast_down_left.is_colliding():
 			StateTransition.emit(self, "WallSlide")

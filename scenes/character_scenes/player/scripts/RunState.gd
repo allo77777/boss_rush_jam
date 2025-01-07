@@ -30,10 +30,6 @@ func Physics_Update(_delta: float):
 	elif !player.is_on_floor():
 		StateTransition.emit(self, "Air")
 	
-	#Run -> PushPull Run
-	elif player.is_pushpull:
-		StateTransition.emit(self, "PushPullRun")
-	
 	#Run -> Crouch Run
 	elif Input.is_action_just_pressed("crouch"):
 		StateTransition.emit(self, "CrouchRun")

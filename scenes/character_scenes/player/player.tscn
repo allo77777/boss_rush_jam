@@ -1,4 +1,4 @@
-[gd_scene load_steps=150 format=3 uid="uid://0tfiodoq66e3"]
+[gd_scene load_steps=151 format=3 uid="uid://0tfiodoq66e3"]
 
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/Player.gd" id="1_qnkkk"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/Attacks.gd" id="2_117p6"]
@@ -24,21 +24,22 @@
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/AttackAnimationTree.gd" id="22_m7vih"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/RaycastMouse.gd" id="23_rufdr"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/AttackMachine.gd" id="24_mvg21"]
+[ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/Attacks/AttackHandler.gd" id="25_67g2n"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/StateMachine.gd" id="25_yqogn"]
+[ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/Attacks/Primary.gd" id="26_a5j71"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/IdleState.gd" id="26_cpcjb"]
+[ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/Attacks/SecondairyFire.gd" id="27_fv44u"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/RunState.gd" id="27_i6672"]
+[ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/Attacks/SecondairyEarth.gd" id="28_6atev"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/AirState.gd" id="28_605b8"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/JumpState.gd" id="29_irksh"]
+[ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/Attacks/SecondairyWater.gd" id="29_ypq7j"]
+[ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/Attacks/SecondairyAir.gd" id="30_1x5mq"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/WallSlideState.gd" id="30_dcqdk"]
-[ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/WallHangState.gd" id="31_7mo00"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/RollState.gd" id="32_f1o7g"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/CrouchIdleState.gd" id="33_3jec4"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/CrouchRunState.gd" id="34_epo17"]
-[ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/PushPullIdle.gd" id="35_kyelh"]
-[ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/PushPullRun.gd" id="36_py7wv"]
-[ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/ClimbState.gd" id="37_lvsyl"]
 [ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/Cursor.gd" id="38_fc2ft"]
-[ext_resource type="Script" path="res://scenes/character_scenes/player/scripts/WallClimbState.gd" id="39_ce7s6"]
 
 [sub_resource type="Animation" id="Animation_exqg3"]
 resource_name = "Climb"
@@ -1666,20 +1667,89 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="AttackMachine" type="Node" parent="."]
+[node name="AttackMachine" type="Node" parent="." node_paths=PackedStringArray("initial_attack")]
 script = ExtResource("24_mvg21")
+initial_attack = NodePath("Primary")
 
-[node name="AttackHandler" type="Node" parent="AttackMachine"]
+[node name="AttackHandler" type="Node" parent="AttackMachine" node_paths=PackedStringArray("state_machine", "player", "player_sprite", "attack_sprite", "attack_visual", "player_stats", "attack_animation_tree", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left")]
+script = ExtResource("25_67g2n")
+state_machine = NodePath("../../StateMachine")
+player = NodePath("../..")
+player_sprite = NodePath("../../PlayerSprite")
+attack_sprite = NodePath("../../AttackVisuals/AttackSprite")
+attack_visual = NodePath("../../AttackVisuals")
+player_stats = NodePath("../../PlayerStats")
+attack_animation_tree = NodePath("../../AttackVisuals/AttackAnimationTree")
+raycast_up_right = NodePath("../../Raycasts/RaycastUp/RaycastUpRight")
+raycast_up_left = NodePath("../../Raycasts/RaycastUp/RaycastUpLeft")
+raycast_down_right = NodePath("../../Raycasts/RaycastDown/RaycastDownRight")
+raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
 
-[node name="Primary" type="Node" parent="AttackMachine"]
+[node name="Primary" type="Node" parent="AttackMachine" node_paths=PackedStringArray("primaryReset", "player", "player_sprite", "attack_sprite", "attack_visual", "player_stats", "attack_animation_tree", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left")]
+script = ExtResource("26_a5j71")
+primaryReset = NodePath("../../Timers/PrimaryReset")
+player = NodePath("../..")
+player_sprite = NodePath("../../PlayerSprite")
+attack_sprite = NodePath("../../AttackVisuals/AttackSprite")
+attack_visual = NodePath("../../AttackVisuals")
+player_stats = NodePath("../../PlayerStats")
+attack_animation_tree = NodePath("../../AttackVisuals/AttackAnimationTree")
+raycast_up_right = NodePath("../../Raycasts/RaycastUp/RaycastUpRight")
+raycast_up_left = NodePath("../../Raycasts/RaycastUp/RaycastUpLeft")
+raycast_down_right = NodePath("../../Raycasts/RaycastDown/RaycastDownRight")
+raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
 
-[node name="SecondaryFire" type="Node" parent="AttackMachine"]
+[node name="SecondaryFire" type="Node" parent="AttackMachine" node_paths=PackedStringArray("player", "player_sprite", "attack_sprite", "attack_visual", "player_stats", "attack_animation_tree", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left")]
+script = ExtResource("27_fv44u")
+player = NodePath("../..")
+player_sprite = NodePath("../../PlayerSprite")
+attack_sprite = NodePath("../../AttackVisuals/AttackSprite")
+attack_visual = NodePath("../../AttackVisuals")
+player_stats = NodePath("../../PlayerStats")
+attack_animation_tree = NodePath("../../AttackVisuals/AttackAnimationTree")
+raycast_up_right = NodePath("../../Raycasts/RaycastUp/RaycastUpRight")
+raycast_up_left = NodePath("../../Raycasts/RaycastUp/RaycastUpLeft")
+raycast_down_right = NodePath("../../Raycasts/RaycastDown/RaycastDownRight")
+raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
 
-[node name="SecondaryEarth" type="Node" parent="AttackMachine"]
+[node name="SecondaryEarth" type="Node" parent="AttackMachine" node_paths=PackedStringArray("player", "player_sprite", "attack_sprite", "attack_visual", "player_stats", "attack_animation_tree", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left")]
+script = ExtResource("28_6atev")
+player = NodePath("../..")
+player_sprite = NodePath("../../PlayerSprite")
+attack_sprite = NodePath("../../AttackVisuals/AttackSprite")
+attack_visual = NodePath("../../AttackVisuals")
+player_stats = NodePath("../../PlayerStats")
+attack_animation_tree = NodePath("../../AttackVisuals/AttackAnimationTree")
+raycast_up_right = NodePath("../../Raycasts/RaycastUp/RaycastUpRight")
+raycast_up_left = NodePath("../../Raycasts/RaycastUp/RaycastUpLeft")
+raycast_down_right = NodePath("../../Raycasts/RaycastDown/RaycastDownRight")
+raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
 
-[node name="SecondaryWater" type="Node" parent="AttackMachine"]
+[node name="SecondaryWater" type="Node" parent="AttackMachine" node_paths=PackedStringArray("player", "player_sprite", "attack_sprite", "attack_visual", "player_stats", "attack_animation_tree", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left")]
+script = ExtResource("29_ypq7j")
+player = NodePath("../..")
+player_sprite = NodePath("../../PlayerSprite")
+attack_sprite = NodePath("../../AttackVisuals/AttackSprite")
+attack_visual = NodePath("../../AttackVisuals")
+player_stats = NodePath("../../PlayerStats")
+attack_animation_tree = NodePath("../../AttackVisuals/AttackAnimationTree")
+raycast_up_right = NodePath("../../Raycasts/RaycastUp/RaycastUpRight")
+raycast_up_left = NodePath("../../Raycasts/RaycastUp/RaycastUpLeft")
+raycast_down_right = NodePath("../../Raycasts/RaycastDown/RaycastDownRight")
+raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
 
-[node name="SecondaryAir" type="Node" parent="AttackMachine"]
+[node name="SecondaryAir" type="Node" parent="AttackMachine" node_paths=PackedStringArray("player", "player_sprite", "attack_sprite", "attack_visual", "player_stats", "attack_animation_tree", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left")]
+script = ExtResource("30_1x5mq")
+player = NodePath("../..")
+player_sprite = NodePath("../../PlayerSprite")
+attack_sprite = NodePath("../../AttackVisuals/AttackSprite")
+attack_visual = NodePath("../../AttackVisuals")
+player_stats = NodePath("../../PlayerStats")
+attack_animation_tree = NodePath("../../AttackVisuals/AttackAnimationTree")
+raycast_up_right = NodePath("../../Raycasts/RaycastUp/RaycastUpRight")
+raycast_up_left = NodePath("../../Raycasts/RaycastUp/RaycastUpLeft")
+raycast_down_right = NodePath("../../Raycasts/RaycastDown/RaycastDownRight")
+raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
 
 [node name="TertiaryFire" type="Node" parent="AttackMachine"]
 
@@ -1773,24 +1843,9 @@ raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
 coyote_time = NodePath("../../Timers/CoyoteTime")
 jump_cooldown = NodePath("../../Timers/JumpCooldown")
 
-[node name="WallHang" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "player_sprite", "attack_sprite", "player_stats", "animation_tree", "raycast_uppper_right", "raycast_uppper_left", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left", "coyote_time", "jump_cooldown")]
-script = ExtResource("31_7mo00")
-player = NodePath("../..")
-player_sprite = NodePath("../../PlayerSprite")
-attack_sprite = NodePath("../../AttackVisuals/AttackSprite")
-player_stats = NodePath("../../PlayerStats")
-animation_tree = NodePath("../../AnimationTree")
-raycast_uppper_right = NodePath("../../Raycasts/RaycastUpper/RaycastUpperRight")
-raycast_uppper_left = NodePath("../../Raycasts/RaycastUpper/RaycastUpperLeft")
-raycast_up_right = NodePath("../../Raycasts/RaycastUp/RaycastUpRight")
-raycast_up_left = NodePath("../../Raycasts/RaycastUp/RaycastUpLeft")
-raycast_down_right = NodePath("../../Raycasts/RaycastDown/RaycastDownRight")
-raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
-coyote_time = NodePath("../../Timers/CoyoteTime")
-jump_cooldown = NodePath("../../Timers/JumpCooldown")
-
-[node name="Roll" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "player_sprite", "attack_sprite", "player_stats", "animation_tree", "raycast_uppper_right", "raycast_uppper_left", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left", "coyote_time", "jump_cooldown")]
+[node name="Roll" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_handler", "player", "player_sprite", "attack_sprite", "player_stats", "animation_tree", "raycast_uppper_right", "raycast_uppper_left", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left", "coyote_time", "jump_cooldown")]
 script = ExtResource("32_f1o7g")
+attack_handler = NodePath("../../AttackMachine/AttackHandler")
 player = NodePath("../..")
 player_sprite = NodePath("../../PlayerSprite")
 attack_sprite = NodePath("../../AttackVisuals/AttackSprite")
@@ -1837,76 +1892,11 @@ raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
 coyote_time = NodePath("../../Timers/CoyoteTime")
 jump_cooldown = NodePath("../../Timers/JumpCooldown")
 
-[node name="PushPullIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "player_sprite", "attack_sprite", "player_stats", "animation_tree", "raycast_uppper_right", "raycast_uppper_left", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left", "coyote_time", "jump_cooldown")]
-script = ExtResource("35_kyelh")
-player = NodePath("../..")
-player_sprite = NodePath("../../PlayerSprite")
-attack_sprite = NodePath("../../AttackVisuals/AttackSprite")
-player_stats = NodePath("../../PlayerStats")
-animation_tree = NodePath("../../AnimationTree")
-raycast_uppper_right = NodePath("../../Raycasts/RaycastUpper/RaycastUpperRight")
-raycast_uppper_left = NodePath("../../Raycasts/RaycastUpper/RaycastUpperLeft")
-raycast_up_right = NodePath("../../Raycasts/RaycastUp/RaycastUpRight")
-raycast_up_left = NodePath("../../Raycasts/RaycastUp/RaycastUpLeft")
-raycast_down_right = NodePath("../../Raycasts/RaycastDown/RaycastDownRight")
-raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
-coyote_time = NodePath("../../Timers/CoyoteTime")
-jump_cooldown = NodePath("../../Timers/JumpCooldown")
-
-[node name="PushPullRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "player_sprite", "attack_sprite", "player_stats", "animation_tree", "raycast_uppper_right", "raycast_uppper_left", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left", "coyote_time", "jump_cooldown")]
-script = ExtResource("36_py7wv")
-player = NodePath("../..")
-player_sprite = NodePath("../../PlayerSprite")
-attack_sprite = NodePath("../../AttackVisuals/AttackSprite")
-player_stats = NodePath("../../PlayerStats")
-animation_tree = NodePath("../../AnimationTree")
-raycast_uppper_right = NodePath("../../Raycasts/RaycastUpper/RaycastUpperRight")
-raycast_uppper_left = NodePath("../../Raycasts/RaycastUpper/RaycastUpperLeft")
-raycast_up_right = NodePath("../../Raycasts/RaycastUp/RaycastUpRight")
-raycast_up_left = NodePath("../../Raycasts/RaycastUp/RaycastUpLeft")
-raycast_down_right = NodePath("../../Raycasts/RaycastDown/RaycastDownRight")
-raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
-coyote_time = NodePath("../../Timers/CoyoteTime")
-jump_cooldown = NodePath("../../Timers/JumpCooldown")
-
-[node name="Climb" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "player_sprite", "attack_sprite", "player_stats", "animation_tree", "raycast_uppper_right", "raycast_uppper_left", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left", "coyote_time", "jump_cooldown")]
-script = ExtResource("37_lvsyl")
-player = NodePath("../..")
-player_sprite = NodePath("../../PlayerSprite")
-attack_sprite = NodePath("../../AttackVisuals/AttackSprite")
-player_stats = NodePath("../../PlayerStats")
-animation_tree = NodePath("../../AnimationTree")
-raycast_uppper_right = NodePath("../../Raycasts/RaycastUpper/RaycastUpperRight")
-raycast_uppper_left = NodePath("../../Raycasts/RaycastUpper/RaycastUpperLeft")
-raycast_up_right = NodePath("../../Raycasts/RaycastUp/RaycastUpRight")
-raycast_up_left = NodePath("../../Raycasts/RaycastUp/RaycastUpLeft")
-raycast_down_right = NodePath("../../Raycasts/RaycastDown/RaycastDownRight")
-raycast_down_left = NodePath("../../Raycasts/RaycastDown/RaycastDownLeft")
-coyote_time = NodePath("../../Timers/CoyoteTime")
-jump_cooldown = NodePath("../../Timers/JumpCooldown")
-
 [node name="Cursor" type="Node" parent="."]
 script = ExtResource("38_fc2ft")
 
-[node name="WallClimb" type="Node" parent="." node_paths=PackedStringArray("player", "player_sprite", "attack_sprite", "player_stats", "animation_tree", "raycast_uppper_right", "raycast_uppper_left", "raycast_up_right", "raycast_up_left", "raycast_down_right", "raycast_down_left", "coyote_time", "jump_cooldown")]
-script = ExtResource("39_ce7s6")
-player = NodePath("..")
-player_sprite = NodePath("../PlayerSprite")
-attack_sprite = NodePath("../AttackVisuals/AttackSprite")
-player_stats = NodePath("../PlayerStats")
-animation_tree = NodePath("../AnimationTree")
-raycast_uppper_right = NodePath("../Raycasts/RaycastUpper/RaycastUpperRight")
-raycast_uppper_left = NodePath("../Raycasts/RaycastUpper/RaycastUpperLeft")
-raycast_up_right = NodePath("../Raycasts/RaycastUp/RaycastUpRight")
-raycast_up_left = NodePath("../Raycasts/RaycastUp/RaycastUpLeft")
-raycast_down_right = NodePath("../Raycasts/RaycastDown/RaycastDownRight")
-raycast_down_left = NodePath("../Raycasts/RaycastDown/RaycastDownLeft")
-coyote_time = NodePath("../Timers/CoyoteTime")
-jump_cooldown = NodePath("../Timers/JumpCooldown")
-
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/WallSlide" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/Roll" method="_on_animation_tree_animation_finished"]
-[connection signal="animation_finished" from="AnimationTree" to="WallClimb" method="_on_animation_tree_animation_finished"]
 [connection signal="area_entered" from="Interactions/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Interactions/Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="animation_finished" from="AttackVisuals/AttackAnimationTree" to="AttackMachine/Primary" method="_on_attack_animation_tree_animation_finished"]

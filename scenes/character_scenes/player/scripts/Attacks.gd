@@ -11,7 +11,7 @@ func _physics_process(delta: float) -> void:
 	
 	element = player_stats.element[player_stats.element_index]
 	
-	if Input.is_action_just_pressed("melee_attack"):
+	if Input.is_action_just_pressed("primary_attack"):
 		if player.debug_mode == true:
 			print("Melee Attack: " + element)
 			
