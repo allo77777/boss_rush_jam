@@ -7,15 +7,21 @@ class_name Player
 @export var JUMP_HEIGHT: int = -350
 @export var DASH_SPEED_MULTIPLIER: float = 2
 @export var WALLSLIDE_SPEED: float = 100
+@export var WALLSLIDE_JUMP: float = 225
 @export var CROUCH_SPEED_MULTIPLIER: float = 0.5
 
 @export_category("Abilities")
+@export_subgroup("Double Jump")
 @export var DOUBLE_JUMP: bool  = true
 @export var DOUBLE_JUMP_AMOUNT: int = 1
 @export var DOUBLE_JUMP_USED: int
+@export var IS_DOUBLE_JUMPING: bool = false
+@export_subgroup("Dash")
 @export var DASH: bool = true
 @export var DASH_AMOUNT: int = 1
 @export var DASH_USED: int 
+@export var IS_DASHING: bool = false
+@export_subgroup("Attack")
 
 
 #References
@@ -29,8 +35,6 @@ class_name Player
 #Variables
 var debug_mode: bool = false
 var facing: int = 1
-var can_jump: bool = true
-var is_dashing: bool = false
 var prevVelocity: Vector2 = Vector2.ZERO
 var cursor_pos: Vector2
 var global_cursor_pos: Vector2
@@ -40,7 +44,7 @@ var interactable_pos: Vector2
 #Plays once
 func _ready():	
 	#Debug
-	debug_mode = root.debug_mode
+	debug_mode = root.state_transitions
 	DOUBLE_JUMP_USED = DOUBLE_JUMP_AMOUNT
 	DASH_USED = DASH_AMOUNT
 		

@@ -10,8 +10,6 @@ func Physics_Update(_delta: float):
 	#Coyote Time control
 	coyote_time.stop()
 	
-	Direction(true) #Function determines which way the player is looking and moving
-	
 	#Y-Axis movement
 	player.velocity.y = player.JUMP_HEIGHT
 	

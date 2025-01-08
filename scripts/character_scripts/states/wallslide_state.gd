@@ -11,12 +11,14 @@ func Enter():
 	player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump
 	player.DASH_USED = player.DASH_AMOUNT #Reset dash
 	
+	Direction(true) #Function determines which way the player is looking and moving
+	
 func Exit():
 	coyote_time.start()
 
 func Physics_Update(_delta: float):
 	#X-Axis movement
-	Direction(false) #Function determines which way the player is looking and moving
+	Direction(false)
 	
 	player.velocity.x = player.SPEED * direction
 	
@@ -25,10 +27,12 @@ func Physics_Update(_delta: float):
 	
 	#Determines the side the player slides on
 	if raycast_up_right.is_colliding():
-		player_sprite.flip_h = false
+		player_sprite.flip_h = true
+		player.facing = -1
 		
 	elif raycast_up_left.is_colliding():
-		player_sprite.flip_h = true
+		player_sprite.flip_h = false
+		player.facing = 1
 	
 	#---Exit WallSlide state---
 	
@@ -40,6 +44,12 @@ func Physics_Update(_delta: float):
 	if Input.is_action_just_pressed("dash") and player.DASH:				
 		StateTransition.emit(self, "Dash")
 		
+	elif Input.is_action_just_pressed("crouch"):
+		StateTransition.emit(self, "Air")
+		
+		#Wallslide jump
+		player.velocity.x = player.WALLSLIDE_JUMP * player.facing
+		
 	#WallSlide -> Idle
 	elif player.is_on_floor():
 		StateTransition.emit(self, "Idle")
@@ -49,11 +59,14 @@ func Physics_Update(_delta: float):
 		StateTransition.emit(self, "Jump")
 		
 		#Wallslide jump
-		player.velocity.x = player.JUMP_HEIGHT * player.facing * 0.7
+		player.velocity.x = player.WALLSLIDE_JUMP * player.facing
 		
 	#Quick jump
 	elif jump_cooldown.time_left > 0:
 		StateTransition.emit(self, "Jump")
+		
+		#Wallslide jump
+		player.velocity.x = player.WALLSLIDE_JUMP * player.facing
 		
 		player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump
 		jump_cooldown.stop()

@@ -10,11 +10,6 @@ func Enter():
 	
 	player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump
 	player.DASH_USED = player.DASH_AMOUNT #Reset dash
-	
-	look_to_mouse = true #Player is able to look towards mouse position
-
-func Exit():
-	look_to_mouse = false #Player isn't able to look towards mouse position
 
 func Physics_Update(_delta: float):			
 	Direction(true) #Function determines which way the player is looking and moving
@@ -33,8 +28,7 @@ func Physics_Update(_delta: float):
 	
 	#Idle -> Air
 	elif !player.is_on_floor():
-		StateTransition.emit(self, "Air")
-	
+		StateTransition.emit(self, "Air")	
 		
 	#Idle -> Crouch Idle
 	elif Input.is_action_pressed("crouch"):

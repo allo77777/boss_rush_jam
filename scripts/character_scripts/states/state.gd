@@ -27,7 +27,6 @@ signal StateTransition
 #Variables
 var direction: float
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity", 980)
-var look_to_mouse: bool = false
 
 #Functions
 func _process(delta):

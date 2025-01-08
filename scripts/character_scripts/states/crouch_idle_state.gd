@@ -10,11 +10,6 @@ func Enter():
 	
 	player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump
 	player.DASH_USED = player.DASH_AMOUNT #Reset dash
-	
-	look_to_mouse = true #Player is able to look towards mouse position
-
-func Exit():
-	look_to_mouse = false #Player isn't able to look towards mouse position
 
 func Physics_Update(_delta: float):
 	#X-Axis movement

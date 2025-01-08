@@ -6,14 +6,9 @@ func Enter():
 	if player.debug_mode == true:
 		print("Air")
 		
-	look_to_mouse = true #Player is able to look towards mouse position
-
-func Exit():
-	look_to_mouse = false #Player isn't able to look towards mouse position
-		
 func Physics_Update(delta: float):			
 	 #Animations
-	if !player.is_on_floor():
+	if !player.is_on_floor() and !player.IS_DOUBLE_JUMPING:
 		
 		if abs(player.velocity.y) < 40:
 			animation_tree.animation_mode.travel("JumpMax")
@@ -54,6 +49,11 @@ func Physics_Update(delta: float):
 		StateTransition.emit(self, "Jump")
 		
 		player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump
+		player.DASH_USED = player.DASH_AMOUNT #Reset dash
+		
+		player.IS_DOUBLE_JUMPING = false
+		player.IS_DASHING = false
+		
 		jump_cooldown.stop()
 		
 	#Coyote Time
@@ -61,27 +61,45 @@ func Physics_Update(delta: float):
 		StateTransition.emit(self, "Jump")
 		
 		player.DOUBLE_JUMP_USED = player.DOUBLE_JUMP_AMOUNT #Reset double jump	
+		player.DASH_USED = player.DASH_AMOUNT #Reset dash
+		
+		player.IS_DOUBLE_JUMPING = false
+		player.IS_DASHING = false
 		
 	#Air -> Dash
 	elif Input.is_action_just_pressed("dash") and player.DASH and player.DASH_USED >= 1 :	
 		StateTransition.emit(self, "Dash")
 		
-		player.DASH_USED -= 1
+		player.IS_DOUBLE_JUMPING = false
+		player.IS_DASHING = false
 		
 	#Double jump
 	elif player.DOUBLE_JUMP == true and player.DOUBLE_JUMP_USED >= 1 and Input.is_action_just_pressed("jump"):
 		StateTransition.emit(self, "Jump")
 		
+		player.IS_DOUBLE_JUMPING = true
 		player.DOUBLE_JUMP_USED -= 1
 		player.DASH_USED = player.DASH_AMOUNT #Reset dash
 		animation_tree.animation_mode.travel("DoubleJump")
 		
 	#Air -> Idle
 	elif player.is_on_floor():
-		StateTransition.emit(self, "Idle")
+		StateTransition.emit(self, "Idle")	
+		
+		player.IS_DOUBLE_JUMPING = false
+		player.IS_DASHING = false
 	
-	
-	elif !player.is_on_floor() and player.velocity.y > 0:					
-		#Air -> WallSlide
-		if raycast_up_right.is_colliding() and raycast_down_right.is_colliding() or raycast_up_left.is_colliding() and raycast_down_left.is_colliding():
-			StateTransition.emit(self, "Wall_Slide")
+	#Air -> WallSlide
+	if !player.is_on_floor() and player.velocity.y > 0:		
+					
+		if raycast_up_right.is_colliding() and raycast_down_right.is_colliding() or raycast_up_left.is_colliding() and raycast_down_left.is_colliding():			
+			
+			StateTransition.emit(self, "Wallslide")
+			
+			player.IS_DOUBLE_JUMPING = false
+			player.IS_DASHING = false
+			
+func _on_animation_tree_animation_finished(anim_name: StringName):			
+	# When double jump animation is done
+	if anim_name == "DoubleJump":					
+		player.IS_DOUBLE_JUMPING = false
