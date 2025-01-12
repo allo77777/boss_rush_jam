@@ -16,6 +16,10 @@ func Physics_Update(_delta: float):
 	
 	player.velocity.x = 0 #No movement for idle state
 	
+	#Attack Animation
+	if Input.is_action_just_pressed("primary_attack"):
+		animation_tree.set("parameters/Idle/Attack/request", 1)
+	
 	#---Exit idle state---
 	
 	#Idle -> Jump

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r1y6m7pm01qb"
-path="res://.godot/imported/player sword_idle_upper.png-5b1bc9b16952f770bbd6be341a9f3f38.ctex"
+uid="uid://c56b0wdy4un7l"
+path="res://.godot/imported/player_sword_slash.png-0b2dd3587e7a0f455fc3371fc0e36a49.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character_assets/temps_asset_packs_spliced/Player Sword Idle/player sword_idle_upper.png"
-dest_files=["res://.godot/imported/player sword_idle_upper.png-5b1bc9b16952f770bbd6be341a9f3f38.ctex"]
+source_file="res://assets/character_assets/temps_asset_packs_spliced/player_sword_attack/player_sword_slash.png"
+dest_files=["res://.godot/imported/player_sword_slash.png-0b2dd3587e7a0f455fc3371fc0e36a49.ctex"]
 
 [params]
 

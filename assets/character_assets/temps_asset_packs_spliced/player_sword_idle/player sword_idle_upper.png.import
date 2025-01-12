@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mmbplguskjv0"
-path="res://.godot/imported/player jump 48x48.png-54f0685d31727648d42f81a92b6bbb3d.ctex"
+uid="uid://c748hjth5ntrg"
+path="res://.godot/imported/player sword_idle_upper.png-d55a254251ae0a15ddd10f41c01162fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character_assets/temps_asset_packs_spliced/Asset Pack-V1/Player Jump/player jump 48x48.png"
-dest_files=["res://.godot/imported/player jump 48x48.png-54f0685d31727648d42f81a92b6bbb3d.ctex"]
+source_file="res://assets/character_assets/temps_asset_packs_spliced/player_sword_idle/player sword_idle_upper.png"
+dest_files=["res://.godot/imported/player sword_idle_upper.png-d55a254251ae0a15ddd10f41c01162fe.ctex"]
 
 [params]
 

@@ -10,6 +10,8 @@ signal StateTransition
 
 @export_category("Sprites")
 @export var player_sprite: Sprite2D
+@export var upper_sprite: Sprite2D
+@export var lower_sprite: Sprite2D
 
 @export_category("Animation")
 @export var animation_tree: AnimationTree
@@ -53,8 +55,12 @@ func Direction(flipSprite: bool):
 		if flipSprite == true:
 			player.facing = 1
 			player_sprite.flip_h = false
+			upper_sprite.flip_h = false
+			lower_sprite.flip_h = false
 		
 	elif direction == -1:		
 		if flipSprite == true:
 			player.facing = -1
 			player_sprite.flip_h = true
+			upper_sprite.flip_h = true
+			lower_sprite.flip_h = true

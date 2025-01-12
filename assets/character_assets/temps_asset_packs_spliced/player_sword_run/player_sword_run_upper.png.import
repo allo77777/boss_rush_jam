@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ywoahe3eahu1"
-path="res://.godot/imported/player sword atk 64x64.png-97ce924c1c59f78d58a58d4603944c01.ctex"
+uid="uid://bmanw2ukwnt4i"
+path="res://.godot/imported/player_sword_run_upper.png-402e5ab31d611293f6bff33ad0f73177.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character_assets/temps_asset_packs_spliced/Basic Sword Attack 1/player sword atk 64x64.png"
-dest_files=["res://.godot/imported/player sword atk 64x64.png-97ce924c1c59f78d58a58d4603944c01.ctex"]
+source_file="res://assets/character_assets/temps_asset_packs_spliced/player_sword_run/player_sword_run_upper.png"
+dest_files=["res://.godot/imported/player_sword_run_upper.png-402e5ab31d611293f6bff33ad0f73177.ctex"]
 
 [params]
 

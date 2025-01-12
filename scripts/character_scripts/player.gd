@@ -5,7 +5,7 @@ class_name Player
 @export_category("Character Movement")
 @export var SPEED: int = 225
 @export var JUMP_HEIGHT: int = -350
-@export var DASH_SPEED_MULTIPLIER: float = 2
+@export var DASH_SPEED_MULTIPLIER: float = 1.75
 @export var WALLSLIDE_SPEED: float = 100
 @export var WALLSLIDE_JUMP: float = 225
 @export var CROUCH_SPEED_MULTIPLIER: float = 0.5
@@ -40,6 +40,8 @@ var cursor_pos: Vector2
 var global_cursor_pos: Vector2
 var all_interactions = []
 var interactable_pos: Vector2
+
+var idle_blend_tree
 
 #Plays once
 func _ready():	

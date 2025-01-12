@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c56b0wdy4un7l"
-path="res://.godot/imported/player katana running attack (upper body).png-3322adbbdbb6bbef7de3bf050b0d33db.ctex"
+uid="uid://da11fojfbe8u2"
+path="res://.godot/imported/player_sword_jump_upper.png-e184c9864acd44f0caca88bcc92c40d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character_assets/temps_asset_packs_spliced/Asset Pack-V4/Player Katana Run Attack/player katana running attack (upper body).png"
-dest_files=["res://.godot/imported/player katana running attack (upper body).png-3322adbbdbb6bbef7de3bf050b0d33db.ctex"]
+source_file="res://assets/character_assets/temps_asset_packs_spliced/player_sword_jump/player_sword_jump_upper.png"
+dest_files=["res://.godot/imported/player_sword_jump_upper.png-e184c9864acd44f0caca88bcc92c40d7.ctex"]
 
 [params]
 

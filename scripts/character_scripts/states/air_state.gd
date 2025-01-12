@@ -18,6 +18,17 @@ func Physics_Update(delta: float):
 			
 		elif player.velocity.y > 0:
 			animation_tree.animation_mode.travel("JumpDown")
+			
+	#Attack Animation
+	if Input.is_action_just_pressed("primary_attack"):
+		if abs(player.velocity.y) < 40:
+			animation_tree.set("parameters/JumpMax/Attack/request", 1)
+			
+		elif player.velocity.y < 0:
+			animation_tree.set("parameters/JumpUp/Attack/request", 1)
+			
+		elif player.velocity.y > 0:
+			animation_tree.set("parameters/JumpDown/Attack/request", 1)
 		
 	#X-Axis movement
 	Direction(true) #Function determines which way the player is looking and moving

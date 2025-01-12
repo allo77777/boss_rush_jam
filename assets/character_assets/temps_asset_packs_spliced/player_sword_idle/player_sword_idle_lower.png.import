@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chxmj5gk2fgng"
-path="res://.godot/imported/player run 48x48.png-cd857bac70a00e030cb51ab3d4f1c883.ctex"
+uid="uid://bbbg1t74h00e"
+path="res://.godot/imported/player_sword_idle_lower.png-2db31d39125353275ab6d255fed741f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character_assets/temps_asset_packs_spliced/Asset Pack-V1/Player Run/player run 48x48.png"
-dest_files=["res://.godot/imported/player run 48x48.png-cd857bac70a00e030cb51ab3d4f1c883.ctex"]
+source_file="res://assets/character_assets/temps_asset_packs_spliced/player_sword_idle/player_sword_idle_lower.png"
+dest_files=["res://.godot/imported/player_sword_idle_lower.png-2db31d39125353275ab6d255fed741f9.ctex"]
 
 [params]
 

@@ -17,6 +17,10 @@ func Physics_Update(_delta: float):
 	
 	player.velocity.x = player.SPEED * direction
 	
+	#Attack Animation
+	if Input.is_action_just_pressed("primary_attack"):
+		animation_tree.set("parameters/Run/Attack/request", 1)
+	
 	#---Exit run state---
 	
 	#Run -> Jump
