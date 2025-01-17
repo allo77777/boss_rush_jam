@@ -2,6 +2,7 @@ extends Node
 
 @export var initial_state: BossState
 
+
 var current_state: BossState
 var states:Dictionary = {}
 
