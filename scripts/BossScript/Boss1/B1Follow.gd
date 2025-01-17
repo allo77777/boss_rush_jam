@@ -10,13 +10,12 @@ func enter():
 	PlayerRef = get_tree().get_first_node_in_group("PlayerGroup")
 	
 func FollowPlayer():
-	var direction = PlayerRef.global_position - BossRef.global_position
-	
-	if direction.length() > 80:
-		BossRef.velocity = direction * Speed
-	else: 
+	var DistanceToPlayer:float = PlayerRef.position.x - BossRef.position.x
+	if DistanceToPlayer >= 20:
+		BossRef.velocity.x  = DistanceToPlayer * Speed
+	elif DistanceToPlayer <= 20:
+		BossRef.velocity.x  = DistanceToPlayer * Speed
+	else:
 		pass
-
-
 func update(_delta: float):
 	FollowPlayer()

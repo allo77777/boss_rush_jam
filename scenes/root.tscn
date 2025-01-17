@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://c2w887lvxv462"]
+[gd_scene load_steps=8 format=4 uid="uid://c2w887lvxv462"]
 
 [ext_resource type="Script" path="res://scripts/root.gd" id="1_sqd3b"]
 [ext_resource type="PackedScene" uid="uid://d3bx3tabdk11c" path="res://scenes/character_scenes/player.tscn" id="2_fhn3h"]
@@ -15,10 +15,14 @@ physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_1ockk")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrdu4"]
+size = Vector2(29.0229, 20)
+
 [node name="root" type="Node2D"]
 script = ExtResource("1_sqd3b")
 
 [node name="player" parent="." groups=["PlayerGroup"] instance=ExtResource("2_fhn3h")]
+position = Vector2(-26, -46)
 collision_layer = 1
 collision_mask = 8
 
@@ -34,6 +38,14 @@ tile_map_data = PackedByteArray("AAD8/wAAAAAAAAAAAAD9/wAAAAAAAAAAAAD+/wAAAAAAAAA
 tile_set = SubResource("TileSet_poiyj")
 
 [node name="Boss1" parent="." node_paths=PackedStringArray("PlayerRef") instance=ExtResource("4_abot1")]
-position = Vector2(111, -49)
-collision_layer = 8
+position = Vector2(95, -38)
+collision_layer = 9
 PlayerRef = NodePath("../player")
+
+[node name="BossLevitate" type="StaticBody2D" parent="."]
+position = Vector2(-29, -2)
+scale = Vector2(15.505, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossLevitate"]
+position = Vector2(-0.322477, 3)
+shape = SubResource("RectangleShape2D_vrdu4")

@@ -1,60 +1,125 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbt0m72bgmt55"]
+[gd_scene load_steps=13 format=3 uid="uid://bbt0m72bgmt55"]
 
-[ext_resource type="Texture2D" uid="uid://cxeg4lt6i8bd5" path="res://assets/tileset.png" id="1_3x2mp"]
 [ext_resource type="Script" path="res://scripts/BossScript/Boss1/Boss1.gd" id="1_pcltk"]
+[ext_resource type="Texture2D" uid="uid://cm6m5uo6pl7kx" path="res://assets/BossAssets/Boss1Assets/boss_levitate.png" id="2_rer6i"]
+[ext_resource type="Texture2D" uid="uid://cnngvvc6obx3c" path="res://assets/BossAssets/Boss1Assets/boos_chest.png" id="3_lq673"]
 [ext_resource type="Script" path="res://scripts/BossScript/Boss1/StateMachineB1.gd" id="3_qhxew"]
+[ext_resource type="Texture2D" uid="uid://x6n45hb6vwp5" path="res://assets/BossAssets/Boss1Assets/B1head.png" id="4_8xexc"]
 [ext_resource type="Script" path="res://scripts/BossScript/Boss1/B1Follow.gd" id="4_i8257"]
+[ext_resource type="Script" path="res://scripts/BossScript/Boss1/B1Attack.gd" id="7_8ai2d"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_odir6"]
-size = Vector2(82, 82)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_owwwo"]
 
 [sub_resource type="Animation" id="Animation_w1xfa"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Tileset:position")
+tracks/0/path = NodePath("sprites/BoosChest:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -11)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprites/B1Head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, -24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprites/BossLevitate:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 12)]
 }
 
 [sub_resource type="Animation" id="Animation_thcni"]
 resource_name = "idle"
-length = 3.132
+length = 3.5815
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Tileset:position")
+tracks/0/path = NodePath("sprites/BoosChest:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.666667, 1.33333, 2.03333, 2.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.633333, 1.56667, 2.86667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-7.935, 0), Vector2(12.08, 0), Vector2(-7.935, 0), Vector2(0, 0)]
+"values": [Vector2(-4, -8), Vector2(0, -11), Vector2(-4, -8), Vector2(0, -11)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprites/B1Head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.633333, 1.53333, 2.86667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-7, -15), Vector2(-3, -17), Vector2(-7, -16), Vector2(0, -18)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprites/BossLevitate:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.566667, 1.16667, 1.73333, 2.4, 2.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 12), Vector2(1, 16), Vector2(1, 12), Vector2(1, 16), Vector2(1, 12), Vector2(1, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_moidp"]
+resource_name = "attack"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_43e0o"]
 _data = {
 "RESET": SubResource("Animation_w1xfa"),
+"attack": SubResource("Animation_moidp"),
 "idle": SubResource("Animation_thcni")
 }
 
 [node name="Boss1" type="CharacterBody2D"]
 script = ExtResource("1_pcltk")
 
-[node name="Tileset" type="Sprite2D" parent="."]
-scale = Vector2(4.0625, 4.375)
-texture = ExtResource("1_3x2mp")
+[node name="sprites" type="Node2D" parent="."]
+
+[node name="BossLevitate" type="Sprite2D" parent="sprites"]
+position = Vector2(1, 12)
+texture = ExtResource("2_rer6i")
+
+[node name="BoosChest" type="Sprite2D" parent="sprites"]
+position = Vector2(0, -11)
+texture = ExtResource("3_lq673")
+
+[node name="B1Head" type="Sprite2D" parent="sprites"]
+position = Vector2(-2, -24)
+texture = ExtResource("4_8xexc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_odir6")
+position = Vector2(1, 5)
+shape = SubResource("CapsuleShape2D_owwwo")
 
 [node name="StateMachineB1" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_qhxew")
@@ -64,7 +129,14 @@ initial_state = NodePath("Follow")
 script = ExtResource("4_i8257")
 BossRef = NodePath("../..")
 
+[node name="Attack" type="Node" parent="StateMachineB1"]
+script = ExtResource("7_8ai2d")
+
 [node name="B1AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_43e0o")
 }
+
+[node name="AtkTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
