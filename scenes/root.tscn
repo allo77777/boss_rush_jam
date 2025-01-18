@@ -39,6 +39,7 @@ tile_set = SubResource("TileSet_poiyj")
 
 [node name="Boss1" parent="." node_paths=PackedStringArray("PlayerRef") instance=ExtResource("4_abot1")]
 position = Vector2(95, -38)
+scale = Vector2(1.56, 1.56)
 collision_layer = 9
 PlayerRef = NodePath("../player")
 
