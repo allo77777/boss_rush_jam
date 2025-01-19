@@ -49,6 +49,9 @@ tracks/2/keys = {
 "values": [Vector2(1, 12)]
 }
 
+[sub_resource type="Animation" id="Animation_moidp"]
+resource_name = "attack"
+
 [sub_resource type="Animation" id="Animation_thcni"]
 resource_name = "idle"
 length = 3.5815
@@ -89,9 +92,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(1, 12), Vector2(1, 16), Vector2(1, 12), Vector2(1, 16), Vector2(1, 12), Vector2(1, 16)]
 }
-
-[sub_resource type="Animation" id="Animation_moidp"]
-resource_name = "attack"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_43e0o"]
 _data = {
